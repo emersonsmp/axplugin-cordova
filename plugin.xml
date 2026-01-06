@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-axplugin"
+        version="1.0.0">
+
+    <name>AxPlugin</name>
+    <description>Plugin Cordova para simular testes de velocidade de internet usando AxPlugin nativo</description>
+    <author>Emerson Sampaio</author>
+    <license>MIT</license>
+    <keywords>cordova,axplugin,velocidade,internet,outsystems</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=9.0.0"/>
+        <engine name="cordova-android" version=">=9.0.0"/>
+    </engines>
+
+    <!-- Interface JavaScript -->
+    <js-module src="www/AxPlugin.js" name="AxPlugin">
+        <clobbers target="cordova.plugins.AxPlugin" />
+    </js-module>
+
+    <!-- Configuração Android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AxPlugin">
+                <param name="android-package" value="com.axplugin.cordova.AxPluginCordova"/>
+            </feature>
+        </config-file>
+
+        <!-- Classe Java do plugin -->
+        <source-file src="src/android/AxPluginCordova.java"
+                     target-dir="src/com/axplugin/cordova"/>
+
+        <!-- Biblioteca .aar nativa -->
+        <lib-file src="src/android/libs/axplugin-release.aar"/>
+
+        <!-- Configurações do Gradle -->
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
+    </platform>
+</plugin>
